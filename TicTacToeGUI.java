@@ -39,6 +39,7 @@ public class TicTacToeGUI {
 
         JButton placeXButton = new JButton("Place X");
         JButton placeOButton = new JButton("Place O");
+        JButton clearButton = new JButton("Clear Board");
 
         // Add components to control panel
         controlPanel.add(new JLabel("Row:"));
@@ -47,6 +48,7 @@ public class TicTacToeGUI {
         controlPanel.add(colSelector);
         controlPanel.add(placeXButton);
         controlPanel.add(placeOButton);
+        controlPanel.add(clearButton);
 
         frame.add(controlPanel,BorderLayout.SOUTH);
 
@@ -61,6 +63,16 @@ public class TicTacToeGUI {
             int row = Integer.parseInt((String) rowSelector.getSelectedItem());
             int col = Integer.parseInt((String) colSelector.getSelectedItem());
             placeImage(boardCells, row, col, "images/o.png");
+        });
+
+        clearButton.addActionListener(e -> {
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    boardCells[row][col].removeAll();
+                    boardCells[row][col].revalidate();
+                    boardCells[row][col].repaint();
+                }
+            }
         });
         
 
