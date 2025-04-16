@@ -13,7 +13,9 @@ public class TicTacToeGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
 
+        // Specify which cell
         JPanel boardContainerPanel = new JPanel(new GridLayout(3, 3));
+        JPanel[][] boardCells = new JPanel[3][3];
 
         // Color alternating
         for (int row = 0; row < 3; row++) {
@@ -21,6 +23,7 @@ public class TicTacToeGUI {
                 JPanel boardCell = new JPanel();
                 boolean isWhite = (row + col) % 2 == 0;
                 boardCell.setBackground(isWhite ? Color.WHITE : Color.GRAY);
+                boardCells[row][col] = boardCell; // Save reference
                 boardContainerPanel.add(boardCell);
             }
         }
