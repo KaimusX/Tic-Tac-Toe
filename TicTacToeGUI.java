@@ -37,33 +37,37 @@ public class TicTacToeGUI {
         JComboBox<String> rowSelector = new JComboBox<>(indices);
         JComboBox<String> colSelector = new JComboBox<>(indices);
 
-        JButton placeXButton = new JButton("Place X");
-        JButton placeOButton = new JButton("Place O");
+        String[] pieces = {"X", "O"};
+        JComboBox<String> pieceSelector = new JComboBox<>(pieces);
+
+        JButton placePieceButton = new JButton("Place Piece");
         JButton clearButton = new JButton("Clear Board");
 
         // Add components to control panel
         controlPanel.add(new JLabel("Row:"));
         controlPanel.add(rowSelector);
-        controlPanel.add(new JLabel("Col:"));
+        controlPanel.add(new JLabel("Column:"));
         controlPanel.add(colSelector);
-        controlPanel.add(placeXButton);
-        controlPanel.add(placeOButton);
+        controlPanel.add(new JLabel("Piece Type:"));
+        controlPanel.add(pieceSelector);
+        controlPanel.add(placePieceButton);
         controlPanel.add(clearButton);
 
         frame.add(controlPanel,BorderLayout.SOUTH);
 
         // Listeners
-        placeXButton.addActionListener(e -> {
+        placePieceButton.addActionListener(e -> {
             int row = Integer.parseInt((String) rowSelector.getSelectedItem());
             int col = Integer.parseInt((String) colSelector.getSelectedItem());
-            placeImage(boardCells, row, col, "images/x.png");
+            String selectedPiece = (String) pieceSelector.getSelectedItem();
+
+            if (selectedPiece.equals("X")) {
+                placeImage(boardCells, row, col, "images/x.png");
+            } else if (selectedPiece.equals("O")) {
+                placeImage(boardCells, row, col, "images/o.png");
+            }
         });
         
-        placeOButton.addActionListener(e -> {
-            int row = Integer.parseInt((String) rowSelector.getSelectedItem());
-            int col = Integer.parseInt((String) colSelector.getSelectedItem());
-            placeImage(boardCells, row, col, "images/o.png");
-        });
 
         clearButton.addActionListener(e -> {
             for (int row = 0; row < 3; row++) {
